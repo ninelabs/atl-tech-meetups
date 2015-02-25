@@ -1,4 +1,7 @@
 # Atlanta Tech Meetups
+Pulled from the [Meetup API](http://www.meetup.com/meetup_api/).
+
+#### Group Name - Date Founded - Number of Members
 - [Atlanta Web Design Group](http://www.meetup.com/atlantawebdesign) - October 8, 2002 - 3227
 - [PyAtl: Atlanta Python Programmers](http://www.meetup.com/python-atlanta) - December 19, 2002 - 1615
 - [The Online ColdFusion Meetup](http://www.meetup.com/coldfusionmeetup) - May 14, 2004 - 2762
