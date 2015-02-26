@@ -1,5 +1,5 @@
 # Atlanta Tech Meetups
-Pulled from the [Meetup API](http://www.meetup.com/meetup_api/).
+These are all groups on Meetup.com within a 50 mile radius of zip 30309 in Midtown Atlanta which list "Tech" as the primary category, sorted by number of members (pulled from the [Meetup API](http://www.meetup.com/meetup_api/)).
 
 #### Group Name - Date Founded - Number of Members
 1. [Atlanta Web Design Group](http://www.meetup.com/atlantawebdesign) - October 8, 2002 - 3230
