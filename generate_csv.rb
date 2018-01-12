@@ -15,11 +15,28 @@ PARAMETERS = {
   key: ENV['MEETUP_API_KEY']
 }
 
+class NilProcessor
+  attr_reader :value
+  def initialize(value)
+    @value = value
+  end
+end
+
+class DescriptionProcessor
+  def initialize(value)
+    @value = value
+  end
+
+  def value
+    @processed_value ||= @value.split("\n")[0]
+  end
+end
+
 COLUMNS = [ 
   {header: "Name", keys: ["name"]},
   {header: "URL", keys: ["link"]},
   {header: "Photo", keys: ["key_photo", "photo_link"]},
-  {header: "Description", keys: ["plain_text_description"]},
+  {header: "Description", keys: ["plain_text_description"], processor: DescriptionProcessor},
   {header: "Members", keys: ["members"]}
 ]
 
@@ -27,16 +44,17 @@ HEADERS = COLUMNS.map { |c| c[:header] }
 COLUMN_KEYS = COLUMNS.map { |c| c[:keys] }
 
 def parse_meetup(meetup)
-  COLUMN_KEYS.map { |c| parse_response_data(meetup, c) }
+  COLUMNS.map { |c| parse_response_data(meetup, c[:keys], c[:processor]) }
 end
 
-def parse_response_data(data, keys)
+def parse_response_data(data, keys, processor)
   return "" if data.nil?
   key = keys[0]
   other_keys = keys[1..-1]
   value = data[key]
-
-  other_keys.empty? ? value : parse_response_data(value, other_keys)
+  return parse_response_data(data[key], other_keys, processor) unless other_keys.empty?
+  processor ||= NilProcessor
+  processor.new(value).value
 end
 
 param_arrays = PARAMETERS.map { |k, v| [k, v] }
